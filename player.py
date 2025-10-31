@@ -11,7 +11,7 @@ class Player(CircleShape):
         pygame.draw.polygon(screen, "white", self.triangle(), width=2)
 
     def update(self, dt):
-        pass
+        self.rotate(dt)
 
     # in the player class
     def triangle(self):
@@ -21,3 +21,11 @@ class Player(CircleShape):
         b = self.position - forward * self.radius - right
         c = self.position - forward * self.radius + right
         return [a, b, c]
+
+    def rotate(self, dt):
+        keys = pygame.key.get_pressed()
+
+        if keys[pygame.K_a]:
+            self.rotation -= PLAYER_TURN_SPEED * dt
+        if keys[pygame.K_d]:
+            self.rotation += PLAYER_TURN_SPEED * dt
